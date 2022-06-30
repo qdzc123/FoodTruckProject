@@ -2,14 +2,16 @@ package com.skilldistillery.foodtruck.entities;
 
 public class FoodTruck{
 
-	public int uniqueId = 0;
-	public String name;
-	public String foodType;
-	public int rating;
+	private int uniqueId;
+	private String name;
+	private String foodType;
+	private int rating;
+	private static int nextId = 1;
 	
 	public FoodTruck( String name, int rating, String foodType) {
 		super();
-		//this.uniqueId = uniqueId;
+		FoodTruck.nextId++;
+		this.uniqueId = nextId;
 		this.name = name;
 		this.foodType = foodType;
 		this.rating = rating;
@@ -24,11 +26,12 @@ public class FoodTruck{
 	}
 
 	public int getUniqueId() {
-		return uniqueId++;
+		return uniqueId;
 	}
 
 	public void setUniqueId(int uniqueId) {
 		this.uniqueId = uniqueId;
+		uniqueId++;
 	}
 
 	public String getFoodType() {

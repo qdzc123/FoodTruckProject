@@ -15,16 +15,17 @@ public class FoodTruckApp {
 		
 		FoodTruck[] truckInfo = app.addingCarInfo(sc);
 		
-		while(true) {
+		boolean excution = true;
+		do {
 			menu();
 			choseOption(sc.nextInt(), truckInfo);
-		}
+		}while(excution == true);
 	}
 	
 	public FoodTruck[] addingCarInfo(Scanner sc) {
-		int number = 5;	
+		//int number = 5;	
 		int i = 0;
-		FoodTruck [] truck  = new FoodTruck[number];
+		FoodTruck [] truck  = new FoodTruck[5];
 		
 		while(i < truck.length) {
 			
@@ -54,6 +55,7 @@ public class FoodTruckApp {
 				System.out.println("Enter the user rating");
 				int  rating = sc.nextInt();
 				truck[i].setRating(rating);	
+				sc.nextLine();
 			}
 			
 			i++;
@@ -71,15 +73,13 @@ public class FoodTruckApp {
 	
 	public static void choseOption(int option, FoodTruck[] truckInfo) {
 		
-		int sum = 0;
-		double average;
 		int max = 0;
 		
 		switch(option) {
 			case 1:
 				//List all the truck
 				for(FoodTruck t : truckInfo) {
-					if(t.getName() != null) {
+					if(t != null) {
 					System.out.println(t.toString());
 				}
 			}
@@ -87,14 +87,7 @@ public class FoodTruckApp {
 				
 			case 2:
 				// the average of the rating
-				for(FoodTruck t : truckInfo) {
-					sum += t.getRating();
-				}
-				average = sum / 5;
-				
-				System.out.println("The average rating of food truck is " + average);
-				
-				break;
+				caseTwo(truckInfo);
 				
 			case 3:
 				//Display the highest-rated food truck.
@@ -120,5 +113,19 @@ public class FoodTruckApp {
 			default:
 				System.out.println("Choose the number between 1 - 4");
 		}
+	}
+	
+	public static void caseTwo(FoodTruck[] truckInfo) {
+		
+		int sum = 0;
+		int average = 0;
+		
+		for(FoodTruck t : truckInfo) {
+			sum += t.getRating();
+		}
+		average = sum / truckInfo.length;
+		
+		System.out.println("The average rating of food truck is " + average);
+		
 	}
 }
